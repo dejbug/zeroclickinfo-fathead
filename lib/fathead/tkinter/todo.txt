@@ -1,0 +1,14 @@
+
+- createa a file (in cover/) of possible keywords.
+- each doc file's title becomes the prefix.
+- *.n docs have options, which become the suffix.
+- parse the troff font changes into <em> and <strong>s..
+- keep in mind the man.macro include.
+- assume that lines not beginning with special chars
+	all belong to the same paragraph. (figure out
+	the real behavior later.)
+- assume that special chars are either <dot> (i.e. '.')
+	or <apostrophe>. (figure it out later.)
+- get going! :)
+
+
