@@ -17,7 +17,6 @@ def test_1():
 	with open("downloads/test.html", "wb") as f:
 		write_pydoc_html(f, cc)
 
-
 def test_2():
 	from mylib.common import Downloads
 	
@@ -25,7 +24,6 @@ def test_2():
 	#	those that end in "*.n"). The "*.3" belong to
 	#	Tk's C API and are of no interest for now.
 	print len(list(Downloads.iter_tk_doc_files()))
-
 
 def test_3():
 	"""I like this approach best. Since we really need to
@@ -64,13 +62,41 @@ def test_4():
 
 		break
 
+def test_5():
+	"""A better Tkinter.py scanner: now reads arguments ."""
+	from imp import find_module
+	from mylib import cache
+	from mylib.index import Index
+	from mylib.parser_pydoc import save_pydocs
+	from mylib.parser_pydoc import is_class
+	
+	# -- Use a cached version of the pydocs.
+	try:
+		cc = cache.load(1)
+	except IOError:
+		# -- No cached version found; so make one.
+		save_pydocs()
+		cc = cache.load(1)
+
+	# from mylib import index
+	# index.create_line_index_for_module("Tkinter", cache_dir="download")
+
+	ii = Index.from_module("Tkinter", cache_dir="download")
+	print ii.__dict__
+	print ii.is_cached()
+	return
+
+	for c in cc.values():
+		if is_class(c):
+			print c.name, c.lineno
 
 
 def main():
 	# test_1()
 	# test_2()
 	# test_3()
-	test_4()
+	# test_4()
+	test_5()
 
 
 if "__main__" == __name__:
