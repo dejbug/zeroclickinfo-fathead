@@ -80,15 +80,15 @@ def test_5():
 
 	# from mylib import index
 	# index.create_line_index_for_module("Tkinter", cache_dir="download")
-
 	ii = Index.from_module("Tkinter", cache_dir="download")
-	print ii.__dict__
-	print ii.is_cached()
-	return
 
-	for c in cc.values():
-		if is_class(c):
-			print c.name, c.lineno
+	with ii as i:
+		for c in cc.values():
+			if is_class(c):
+				print c.name, c.lineno
+				print i.get_line_text(c.lineno-1)
+				print
+
 
 
 def main():
